@@ -67,3 +67,7 @@ so i went i tried to mod bank B THIS time it booted but nothing change since the
 I chould go mod the bootloader to mabey check if it veryfying the partions but that not my level so im gonna leve the .bin in the repo if anyone wants to check it out\
 
 Thank you all for reading this
+
+
+NOTE: I forgot to add the /proc/cpuinfo and /proc/meminfo and i already put away the router but you have info on the ram and cpu 
+and the full bootlog sorry!!!
