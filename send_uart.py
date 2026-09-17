@@ -1,3 +1,6 @@
+# if you want to use this file change the port to yours and were the file is and dont forget to change the name of the file sent to the router since it  gonna overwritre it
+# like i have snake and i want to upload doom now change even snake to doom
+
 import time
 import serial
 from pathlib import Path
