@@ -34,10 +34,10 @@ and i compiled the source code for 32bit MIPS of course with static option in gc
 i got some games to work like snake and doom cli that i send over my script you can find it in the repo "send_uart.py"
 
 here a video of snake:
-#FILE FOR VIDEO
+[VIDEO](https://drive.google.com/drive/folders/1JeeVAB6p9556dAReSyO9myk9O1TS2R4B?usp=sharing)
 
 Video of DOOM:
-#FILE FOR VIDEO
+[VIDEO](https://drive.google.com/drive/folders/1JeeVAB6p9556dAReSyO9myk9O1TS2R4B?usp=sharing)
 
 i can send other file but i dont have a use for this router so i chose game for POC
 
