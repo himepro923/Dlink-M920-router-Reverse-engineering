@@ -69,5 +69,5 @@ I chould go mod the bootloader to mabey check if it veryfying the partions but t
 Thank you all for reading this
 
 
-NOTE: I forgot to add the /proc/cpuinfo and /proc/meminfo and i already put away the router but you have info on the ram and cpu 
-and the full bootlog sorry!!!
+**NOTE:** I forgot to grab `/proc/cpuinfo` and `/proc/meminfo` before putting the router away. I can't access them right now, but the CPU and RAM information is already available from the boot logs, so the important hardware information is still documented. Sorry about that!
+
