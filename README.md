@@ -38,6 +38,7 @@ here a video of snake:
 
 Video of DOOM:
 [VIDEO](https://drive.google.com/drive/folders/1JeeVAB6p9556dAReSyO9myk9O1TS2R4B?usp=sharing)
+doom crash for some reason over UART & telnetd
 
 i can send other file but i dont have a use for this router so i chose game for POC
 
