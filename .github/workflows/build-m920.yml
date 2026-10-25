@@ -1,0 +1,58 @@
+name: build-m920
+# Manual run: Actions tab -> build-m920 -> Run workflow. Builds the DWR-M920 sketch on the
+# DIR-842 OpenWrt base (ggbruno fork, Linux 4.14). First builds are expected to need fixes.
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 350
+    container: debian:11
+    env:
+      FORCE_UNSAFE_CONFIGURE: "1"
+    steps:
+      - name: Build tools
+        run: |
+          apt-get update
+          apt-get install -y build-essential libncurses5-dev gawk git subversion libssl-dev gettext \
+            zlib1g-dev swig unzip time rsync python3 python2 wget file curl perl xsltproc \
+            libxml-parser-perl ca-certificates ccache
+      - name: Get this branch
+        run: git clone --depth 1 --branch "${{ github.ref_name }}" "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" src
+      - name: Base tree + DIR-842 overlay + M920 overlay
+        run: |
+          git clone https://github.com/ggbruno/openwrt openwrt
+          git -C openwrt checkout 8a0ccb93f3431bcf8f5c5d03d4acc2c8e442de67
+          git clone --depth 1 https://github.com/MichaelPriest/openwrt-dlink-dir842-r1 dir842
+          cp -a dir842/files/. openwrt/
+          cp dir842/feeds.conf openwrt/feeds.conf
+          cp src/openwrt-port/target/linux/realtek/dts/DWRM920.dts openwrt/target/linux/realtek/dts/
+          python3 src/openwrt-port/scripts/splice_m920.py openwrt/target/linux/realtek/image/Makefile src/openwrt-port/image-profile.mk
+      - name: Feeds and config
+        working-directory: openwrt
+        run: |
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+          printf '%s\n' CONFIG_TARGET_realtek=y CONFIG_TARGET_realtek_rtl8197f=y \
+            CONFIG_TARGET_realtek_rtl8197f_DEVICE_DWRM920=y > .config
+          make defconfig
+          grep -E "DWRM920|TARGET_realtek" .config
+      - name: Download sources
+        working-directory: openwrt
+        run: make download -j8
+      - name: Build
+        working-directory: openwrt
+        run: make -j$(nproc) V=s > ../build.log 2>&1 || (make -j1 V=s > ../build-retry.log 2>&1)
+      - name: Collect
+        if: always()
+        run: |
+          mkdir -p out
+          cp -r openwrt/bin/targets/realtek out/ 2>/dev/null || true
+          cp openwrt/.config out/config.txt 2>/dev/null || true
+          tail -n 400 build.log > out/build-tail.log 2>/dev/null || true
+          tail -n 400 build-retry.log > out/build-retry-tail.log 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m920-build
+          path: out

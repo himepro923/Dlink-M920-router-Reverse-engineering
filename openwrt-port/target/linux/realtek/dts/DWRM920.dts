@@ -26,6 +26,9 @@
 	 * the stock binaries (libapmib/boa/sysconf) or the SDK's dev_leds_gpio.c. */
 };
 
+/* no PCIe device on this board (stock: "PCIE -> Cannot LinkUP") */
+&pcie0 { status = "disabled"; };
+
 &gpio0 { status = "okay"; };
 &gpio1 { status = "okay"; };
 
