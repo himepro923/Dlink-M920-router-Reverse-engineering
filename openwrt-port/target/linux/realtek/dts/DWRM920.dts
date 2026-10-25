@@ -1,0 +1,84 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * D-Link DWR-M920 (Zain build, hw A1) - RTL8197FH-VG, 128 MB DDR2, 16 MB EN25QH128A.
+ * STAGE 1 SKETCH: serial console + flash map only. Not built, not booted.
+ * Everything below is taken from the stock serial log and the SPI dump; items
+ * marked TODO are not known yet.
+ */
+/dts-v1/;
+
+#include "RTL8197F.dtsi"
+
+/ {
+	compatible = "dlink,dwr-m920", "realtek,rtl8197f-soc";
+	model = "D-Link DWR-M920";
+
+	memory {
+		device_type = "memory";
+		reg = <0x0 0x8000000>;		/* 128 MB, bootloader: "Detect dram size = 128MB" */
+	};
+
+	chosen {
+		bootargs = "console=ttyS0,38400";	/* stock: console=ttyS0,38400 */
+	};
+
+	/* TODO: LEDs / buttons / modem reset+power GPIOs - not in the logs; decode from
+	 * the stock binaries (libapmib/boa/sysconf) or the SDK's dev_leds_gpio.c. */
+};
+
+/* no PCIe device on this board (stock: "PCIE -> Cannot LinkUP") */
+&pcie0 { status = "disabled"; };
+
+&gpio0 { status = "okay"; };
+&gpio1 { status = "okay"; };
+
+/* TODO(stage 2): internal 5-port switch. Stock log: eth1 = WAN (port mask 0x01);
+ * eth0/eth2/eth3/eth4 = LAN (masks 0x02/0x04/0x08/0x10). No external switch.
+ * The DIR-842 rtl819x-eth driver assumes an RGMII trunk to an RTL8367S and needs an
+ * "internal PHY" mode - see docs/M920-HARDWARE.md. */
+
+/* TODO(stage 2): USB. On-chip EHCI @0x18021000 + OHCI @0x18020000, IRQ 21, one port,
+ * Quectel module 2c7c:6005 attached directly. PHY init values are in docs/M920-HARDWARE.md. */
+
+&spi0 {
+	status = "okay";
+
+	flash@0 {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "jedec,spi-nor";	/* JEDEC id 1C7018 (EON EN25QH128A) */
+		reg = <0>;
+		spi-max-frequency = <41000000>;	/* stock runs 75 MHz; stay conservative first */
+
+		/* Stock map (bank 1). Bootloader/hw-settings/config are never touched. */
+		partition@0 {
+			label = "boot";
+			reg = <0x0 0x20000>;
+			read-only;
+		};
+
+		partition@20000 {
+			label = "settings";		/* 'H601' hw settings (MAC, RF calibration) @0x20000, 'COMPCS' config @0x2a000 */
+			reg = <0x20000 0x10000>;
+			read-only;
+		};
+
+		partition@30000 {
+			label = "kernel";		/* 'cr6c' image, load 0x80a00000 */
+			reg = <0x30000 0x2d0000>;
+		};
+
+		partition@300000 {
+			label = "rootfs";		/* squashfs + 2-byte checksum, read-only */
+			reg = <0x300000 0x500000>;
+		};
+
+		/* Bank 2 is NOT used as a fallback (the loader hangs on a bad bank 1, it does
+		 * not switch). Its space becomes the writable overlay so the checksum at the
+		 * end of the rootfs is never overwritten by jffs2. */
+		partition@800000 {
+			label = "rootfs_data";
+			reg = <0x800000 0x800000>;
+		};
+	};
+};
