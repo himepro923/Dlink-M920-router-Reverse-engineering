@@ -7,6 +7,8 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     timeout-minutes: 350
+    permissions:
+      contents: write
     container: debian:11
     env:
       FORCE_UNSAFE_CONFIGURE: "1"
@@ -56,10 +58,27 @@ jobs:
         if: always()
         run: |
           mkdir -p out
-          cp -r openwrt/bin/targets/realtek out/ 2>/dev/null || true
+          T=openwrt/bin/targets/realtek/rtl8197f
+          cp $T/*.bin $T/*.manifest $T/sha256sums $T/profiles.json out/ 2>/dev/null || true
           cp openwrt/.config out/config.txt 2>/dev/null || true
-          tail -n 400 build.log > out/build-tail.log 2>/dev/null || true
-          tail -n 400 build-retry.log > out/build-retry-tail.log 2>/dev/null || true
+          grep -E "DWRM920|TARGET_realtek|TARGET_DEVICE" openwrt/.config > out/config-grep.txt 2>&1 || true
+          { echo "== image files"; ls -l $T 2>&1; echo "== all bins"; find openwrt/bin -name "*.bin" -exec ls -l {} + 2>&1; \
+            echo "== dtb/dts"; find openwrt/build_dir -name "DWRM920*" 2>&1 | head; } > out/report.txt
+          tail -n 300 build.log > out/build-tail.log 2>/dev/null || true
+          tail -n 300 build-retry.log > out/build-retry-tail.log 2>/dev/null || true
+      - name: Publish results to branch build-output
+        if: always()
+        run: |
+          cd src
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git checkout -q --orphan build-output
+          git rm -rq --cached . || true
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -r ../out/. .
+          git add -A
+          git commit -q -m "build output run ${{ github.run_id }}"
+          git push -f origin build-output
       - uses: actions/upload-artifact@v4
         if: always()
         with:
