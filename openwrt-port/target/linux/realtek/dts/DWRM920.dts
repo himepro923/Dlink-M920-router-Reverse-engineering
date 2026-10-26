@@ -19,7 +19,7 @@
 	};
 
 	chosen {
-		bootargs = "console=ttyS0,38400 ignore_loglevel initcall_debug";	/* stock: console=ttyS0,38400; extra flags = test-3 diagnostics */
+		bootargs = "console=ttyS0,38400 ignore_loglevel initcall_debug keep_bootcon";	/* stock: console=ttyS0,38400; extra flags = diagnostics; keep_bootcon keeps the early console alive after the 8250 driver takes over (test 3 went silent exactly there) */
 	};
 
 	/* TODO: LEDs / buttons / modem reset+power GPIOs - not in the logs; decode from
