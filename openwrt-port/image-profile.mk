@@ -3,10 +3,15 @@
 # burn 0x30000; rootfs squashfs at 0x300000 padded to 64 KB, then a 2-byte checksum
 # (two's-complement sum of big-endian 16-bit words, the same as cvimg's calculate_checksum).
 
-# pad squashfs to 64 KB, append the 16-bit checksum (checked against the stock image)
+# The stock loader reads the rootfs length from the SquashFS superblock "mkfs_time" field:
+#   len = big-endian word at offset 8 + 0x282, checksummed region = [rootfs, rootfs+len),
+#   sum of big-endian 16-bit words must be 0. Pad to 64 KB, set the field, append the checksum.
+# (Verified: reproduces the stock rootfs bytes exactly; a build without this field failed with
+#  "rootfs checksum error at 00300000!" on the real router.)
 define Build/m920-rootfs-sum
 	perl -e 'local $$/; open F,"<$@" or die; $$d=<F>; close F; \
 	  $$d.="\0" x ((65536-length($$d)%65536)%65536); \
+	  substr($$d,8,4)=pack("N",length($$d)+2-0x282); \
 	  $$s=0; $$s+=$$_ for unpack("n*",$$d); $$c=(-$$s)&0xffff; \
 	  open O,">$@" or die; binmode O; print O $$d, pack("n",$$c); close O'
 endef
