@@ -73,12 +73,19 @@
 			reg = <0x300000 0x500000>;
 		};
 
-		/* Bank 2 is NOT used as a fallback (the loader hangs on a bad bank 1, it does
-		 * not switch). Its space becomes the writable overlay so the checksum at the
-		 * end of the rootfs is never overwritten by jffs2. */
+		/* Bank 2 boot/settings/kernel (0x800000-0xb00000) is left untouched: the stock loader may
+		 * read it. The loader hangs on a bad bank 1 (no automatic fallback observed), so bank 2 is
+		 * not a working fallback; its rootfs area becomes the writable overlay, so the checksum at
+		 * the end of the rootfs is never overwritten by jffs2. */
 		partition@800000 {
+			label = "bank2";
+			reg = <0x800000 0x300000>;
+			read-only;
+		};
+
+		partition@b00000 {
 			label = "rootfs_data";
-			reg = <0x800000 0x800000>;
+			reg = <0xb00000 0x500000>;
 		};
 	};
 };

@@ -9,5 +9,9 @@ if any('Device/DWRM920' in l for l in lines):
 i = next(n for n, l in enumerate(lines) if l.strip() == 'ifeq ($(SUBTARGET),rtl8196e)')
 j = max(n for n in range(i) if lines[n].strip() == 'endif')   # endif closing the rtl8197f block
 lines[j:j] = [''] + snippet + ['']
-open(mk, 'w').write('\n'.join(lines))
+text = '\n'.join(lines)
+old = 'LZMA_TEXT_START=0x81000000'
+assert text.count(old) == 1, 'loader-common not found'
+text = text.replace(old, 'LZMA_TEXT_START=$(if $(LOADER_TEXT_START),$(LOADER_TEXT_START),0x81000000)')
+open(mk, 'w').write(text)
 print('spliced DWRM920 profile before line', j + 1)

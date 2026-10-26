@@ -11,6 +11,8 @@ define Build/m920-rootfs-sum
 	  open O,">$@" or die; binmode O; print O $$d, pack("n",$$c); close O'
 endef
 
+DEVICE_VARS += LOADER_TEXT_START
+
 define Device/DWRM920
   $(Device/RealtekDTS)
   BLOCKSIZE := 64k
@@ -24,8 +26,11 @@ define Device/DWRM920
   CVIMG_KERNEL_BURN_ADDR := 0x30000
   CVIMG_LOADER_START_ADDR := 0x80A00000
   CVIMG_CUSTOM_SIGNATURE := cr6c
+  # The Realtek loader copies the image to the header start address and jumps there, so the
+  # lzma stub must be LINKED at that address (stock: 0x80A00000). Default 0x81000000 would crash.
+  LOADER_TEXT_START := 0x80A00000
   IMAGES := kernel.bin rootfs.bin
-  IMAGE/kernel.bin = append-kernel | cvimg-custom | pad-to 2816k
+  IMAGE/kernel.bin = append-kernel | cvimg-custom | pad-to 2880k
   IMAGE/rootfs.bin = append-rootfs | m920-rootfs-sum
   DEVICE_PACKAGES := kmod-usb-core kmod-usb-ohci kmod-usb2 kmod-usb-net-cdc-ether \
 	kmod-usb-serial-option swconfig ppp
