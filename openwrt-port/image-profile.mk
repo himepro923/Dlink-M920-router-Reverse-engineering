@@ -8,9 +8,12 @@
 #   sum of big-endian 16-bit words must be 0. Pad to 64 KB, set the field, append the checksum.
 # (Verified: reproduces the stock rootfs bytes exactly; a build without this field failed with
 #  "rootfs checksum error at 00300000!" on the real router.)
+# Pad so that data + 2-byte checksum is an exact multiple of 64 KB: the checksum then sits in the
+# last two bytes of the last rootfs erase block and the auto-split "rootfs_data" (jffs2 overlay) that
+# starts at the next block never contains it, so formatting the overlay cannot destroy the checksum.
 define Build/m920-rootfs-sum
 	perl -e 'local $$/; open F,"<$@" or die; $$d=<F>; close F; \
-	  $$d.="\0" x ((65536-length($$d)%65536)%65536); \
+	  $$d.="\0" x ((65534-length($$d)%65536+65536)%65536); \
 	  substr($$d,8,4)=pack("N",length($$d)+2-0x282); \
 	  $$s=0; $$s+=$$_ for unpack("n*",$$d); $$c=(-$$s)&0xffff; \
 	  open O,">$@" or die; binmode O; print O $$d, pack("n",$$c); close O'

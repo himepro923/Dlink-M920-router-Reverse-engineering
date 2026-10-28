@@ -45,9 +45,9 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           printf '%s\n' CONFIG_TARGET_realtek=y CONFIG_TARGET_realtek_rtl8197f=y \
-            CONFIG_TARGET_realtek_rtl8197f_DEVICE_DWRM920=y > .config
+            CONFIG_TARGET_realtek_rtl8197f_DEVICE_DWRM920=y '# CONFIG_KERNEL_CRASHLOG is not set' > .config
           make defconfig
-          grep -E "DWRM920|TARGET_realtek" .config
+          grep -E "DWRM920|TARGET_realtek|CRASHLOG" .config
       - name: Download sources
         working-directory: openwrt
         run: make download -j8

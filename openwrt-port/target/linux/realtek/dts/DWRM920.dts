@@ -19,7 +19,7 @@
 	};
 
 	chosen {
-		bootargs = "console=ttyS0,38400 ignore_loglevel initcall_debug keep_bootcon initcall_blacklist=dw8250_platform_driver_init";	/* stock: console=ttyS0,38400; extra flags = diagnostics; keep_bootcon keeps the early console alive; test 3 went silent inside dw8250_platform_driver_init, so test 4 skips that initcall to see what comes next */
+		bootargs = "console=ttyS0,38400 ignore_loglevel initcall_debug keep_bootcon";	/* stock: console=ttyS0,38400; extra flags = diagnostics (test 5: crashlog off, serial driver re-enabled) */
 	};
 
 	/* TODO: LEDs / buttons / modem reset+power GPIOs - not in the logs; decode from
@@ -80,17 +80,12 @@
 
 		/* Bank 2 boot/settings/kernel (0x800000-0xb00000) is left untouched: the stock loader may
 		 * read it. The loader hangs on a bad bank 1 (no automatic fallback observed), so bank 2 is
-		 * not a working fallback; its rootfs area becomes the writable overlay, so the checksum at
-		 * the end of the rootfs is never overwritten by jffs2. */
+		 * not a working fallback; the writable overlay is the "rootfs_data" that mtdsplit carves out behind the squashfs
+		 * (0x460000-0x800000); the rootfs image is padded so its checksum stays inside the rootfs block. */
 		partition@800000 {
 			label = "bank2";
 			reg = <0x800000 0x300000>;
 			read-only;
-		};
-
-		partition@b00000 {
-			label = "rootfs_data";
-			reg = <0xb00000 0x500000>;
 		};
 	};
 };
