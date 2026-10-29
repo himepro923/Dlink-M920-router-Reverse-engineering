@@ -1,8 +1,8 @@
-serial: 8250_dw: allow polled mode when no irq; report unusual IIR ids (RTL8197F M920 irq storm)
+serial: 8250_dw: allow polled mode when no irq; always read LSR when polled; report unusual IIR ids (RTL8197F M920)
 
 --- a/drivers/tty/serial/8250/8250_dw.c
 +++ b/drivers/tty/serial/8250/8250_dw.c
-@@ -206,6 +206,17 @@
+@@ -232,6 +232,17 @@
  	unsigned int iir = p->serial_in(p, UART_IIR);
  	unsigned int status;
  	unsigned long flags;
@@ -20,7 +20,23 @@ serial: 8250_dw: allow polled mode when no irq; report unusual IIR ids (RTL8197F
  
  	/*
  	 * There are ways to get Designware-based UARTs into a state where
-@@ -423,9 +434,15 @@
+@@ -253,6 +264,15 @@
+ 		spin_unlock_irqrestore(&p->lock, flags);
+ 	}
+ 
++	/*
++	 * Polled mode (no interrupt line): the RTL8197F UART does not report a pending
++	 * THRE interrupt in IIR when THRI is switched on while the transmitter is already
++	 * empty, so the timer poll sees "no interrupt" and never starts queued tty output
++	 * until a character happens to arrive. Always look at LSR when polling.
++	 */
++	if (!p->irq)
++		iir &= ~UART_IIR_NO_INT;
++
+ 	if (serial8250_handle_irq(p, iir))
+ 		return 1;
+ 
+@@ -458,9 +478,15 @@
  	}
  
  	if (irq < 0) {
