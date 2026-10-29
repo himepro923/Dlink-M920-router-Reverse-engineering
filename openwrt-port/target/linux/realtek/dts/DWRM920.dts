@@ -19,7 +19,7 @@
 	};
 
 	chosen {
-		bootargs = "console=ttyS0,38400";	/* same as stock */
+		bootargs = "console=ttyS0,38400 ignore_loglevel keep_bootcon";	/* stock: console=ttyS0,38400; extra flags = diagnostics */
 	};
 
 	/* TODO: LEDs / buttons / modem reset+power GPIOs - not in the logs; decode from
