@@ -6,7 +6,7 @@
 	uartregs() {
 		for r in 04:IER 08:IIR 0c:LCR 10:MCR 14:LSR 18:MSR 20:STS; do
 			o=${r%%:*}; n=${r##*:}
-			echo "$n=$(devmem 0x180147$o 32 2>&1)"
+			echo "$n=$(devmem 0x181470$o 32 2>&1)"
 		done | tr '\n' ' '; echo
 	}
 	sleep 40
