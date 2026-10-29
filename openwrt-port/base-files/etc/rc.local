@@ -1,0 +1,25 @@
+# DWR-M920 bring-up diagnostics (test 8).
+# Userspace output on the serial console has not shown up yet, but kernel messages do, so this
+# dumps the state of the box into the kernel log (/dev/kmsg) a little after boot and then starts
+# a fallback shell on the serial port. Runs in the background so boot is never held up.
+(
+	sleep 40
+	dump() { while IFS= read -r l; do echo "m920: $l" > /dev/kmsg; done; }
+	{
+		echo "== ps";            ps
+		echo "== inittab";       cat /etc/inittab
+		echo "== console";       cat /sys/class/tty/console/active; cat /proc/consoles
+		echo "== devices";       ls -l /dev/console /dev/ttyS0 /dev/tty
+		echo "== serial";        cat /proc/tty/driver/serial
+		echo "== interrupts";    cat /proc/interrupts
+		echo "== net";           ip link
+		echo "== mtd";           cat /proc/mtd
+		echo "== mounts";        cat /proc/mounts
+		echo "== libexec";       ls -l /usr/libexec /sbin/askfirst
+		echo "== rc.d";          ls /etc/rc.d
+		echo "== logread";       logread | tail -40
+	} 2>&1 | dump
+	echo "m920: starting fallback shell on ttyS0" > /dev/kmsg
+	setsid /bin/sh -c 'exec /bin/ash --login </dev/ttyS0 >/dev/ttyS0 2>&1' &
+) &
+exit 0

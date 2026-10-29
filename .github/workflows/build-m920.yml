@@ -39,6 +39,12 @@ jobs:
           cp dir842/feeds.conf openwrt/feeds.conf
           cp src/openwrt-port/target/linux/realtek/dts/DWRM920.dts openwrt/target/linux/realtek/dts/
           cp src/openwrt-port/target/linux/realtek/patches-4.14/*.patch openwrt/target/linux/realtek/patches-4.14/
+          # The DIR-842 overlay ships DIR-842-only boot logic (external RTL8367S switch bring-up, ASIC L2 pokes,
+          # 5 GHz seed config). None of it applies to the M920, so drop it and use our own rc.local.
+          B=openwrt/target/linux/realtek/base-files/etc
+          rm -f $B/init.d/dir842-asic $B/init.d/dir842-l2flush $B/init.d/asic-wifi-settle $B/config/dir842
+          rm -f $B/uci-defaults/*
+          cp src/openwrt-port/base-files/etc/rc.local $B/rc.local
           python3 src/openwrt-port/scripts/splice_m920.py openwrt/target/linux/realtek/image/Makefile src/openwrt-port/image-profile.mk
       - name: Feeds and config
         working-directory: openwrt
