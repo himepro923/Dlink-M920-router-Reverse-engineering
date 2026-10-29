@@ -1,0 +1,41 @@
+serial: 8250_dw: allow polled mode when no irq; report unusual IIR ids (RTL8197F M920 irq storm)
+
+--- a/drivers/tty/serial/8250/8250_dw.c
++++ b/drivers/tty/serial/8250/8250_dw.c
+@@ -206,6 +206,17 @@
+ 	unsigned int iir = p->serial_in(p, UART_IIR);
+ 	unsigned int status;
+ 	unsigned long flags;
++	static int dbg_left = 24;
++
++	/* Diagnostics: report unusual interrupt ids (not none/THRE/RX/RX-timeout) a few times. */
++	if (dbg_left && !(iir & UART_IIR_NO_INT) &&
++	    (iir & 0x3f) != UART_IIR_THRI && (iir & 0x3f) != UART_IIR_RDI &&
++	    (iir & 0x3f) != UART_IIR_RX_TIMEOUT) {
++		dbg_left--;
++		pr_info("dw8250: unusual iir=%02x lsr=%02x msr=%02x ier=%02x\n", iir,
++			p->serial_in(p, UART_LSR), p->serial_in(p, UART_MSR),
++			p->serial_in(p, UART_IER));
++	}
+ 
+ 	/*
+ 	 * There are ways to get Designware-based UARTs into a state where
+@@ -423,9 +434,15 @@
+ 	}
+ 
+ 	if (irq < 0) {
+-		if (irq != -EPROBE_DEFER)
+-			dev_err(dev, "cannot get irq\n");
+-		return irq;
++		if (irq == -EPROBE_DEFER)
++			return irq;
++		/*
++		 * No usable interrupt: run the port polled (the 8250 core
++		 * kicks it from a timer when irq == 0). RTL8197F boards use
++		 * this when the UART interrupt line cannot be quiesced.
++		 */
++		dev_info(dev, "no irq, using polled mode\n");
++		irq = 0;
+ 	}
+ 
+ 	spin_lock_init(&p->lock);

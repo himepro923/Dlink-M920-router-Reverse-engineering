@@ -1,0 +1,18 @@
+--- a/drivers/tty/serial/8250/8250_dw.c	2026-10-29 09:37:56.334194435 +0300
++++ b/drivers/tty/serial/8250/8250_dw.c	2026-10-29 09:37:56.392365149 +0300
+@@ -577,6 +577,15 @@
+ 
+ 	dw8250_quirks(p, data);
+ 
++	/*
++	 * RTL8197F (D-Link DWR-M920): once the port is opened for the login shell
++	 * the UART interrupt never deasserts ("serial8250: too much work for irq17"
++	 * forever, tty output stalls). Run the port without an interrupt: the 8250
++	 * core then polls it from a timer, which is plenty for a console.
++	 */
++	if (dev->of_node && of_device_is_compatible(dev->of_node, "realtek,rtl8197f-uart"))
++		p->irq = 0;
++
+ 	/* If the Busy Functionality is not implemented, don't handle it */
+ 	if (data->uart_16550_compatible)
+ 		p->handle_irq = NULL;

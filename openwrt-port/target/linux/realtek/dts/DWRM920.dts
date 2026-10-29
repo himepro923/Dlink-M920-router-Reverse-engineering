@@ -19,11 +19,19 @@
 	};
 
 	chosen {
-		bootargs = "console=ttyS0,38400 ignore_loglevel initcall_debug keep_bootcon";	/* stock: console=ttyS0,38400; extra flags = diagnostics (test 5: crashlog off, serial driver re-enabled) */
+		bootargs = "console=ttyS0,38400";	/* same as stock */
 	};
 
 	/* TODO: LEDs / buttons / modem reset+power GPIOs - not in the logs; decode from
 	 * the stock binaries (libapmib/boa/sysconf) or the SDK's dev_leds_gpio.c. */
+};
+
+/* test 6: with the UART interrupt connected the box floods "serial8250: too much work for irq17" as soon
+ * as the console tty is opened (test 5) and the shell starves. Run the port polled instead:
+ * patches-4.14/0010 lets 8250_dw fall back to the 8250 core's timer when the node has no interrupt. */
+&serial0 {
+	/delete-property/ interrupts;
+	/delete-property/ interrupt-parent;
 };
 
 /* no PCIe device on this board (stock: "PCIE -> Cannot LinkUP") */

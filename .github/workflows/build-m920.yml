@@ -38,6 +38,8 @@ jobs:
           cp -a dir842/files/. openwrt/
           cp dir842/feeds.conf openwrt/feeds.conf
           cp src/openwrt-port/target/linux/realtek/dts/DWRM920.dts openwrt/target/linux/realtek/dts/
+          cp src/openwrt-port/target/linux/realtek/patches-4.14/*.patch openwrt/target/linux/realtek/patches-4.14/
+          cp src/openwrt-port/target/linux/realtek/patches-4.14/*.patch openwrt/target/linux/realtek/patches-4.14/
           python3 src/openwrt-port/scripts/splice_m920.py openwrt/target/linux/realtek/image/Makefile src/openwrt-port/image-profile.mk
       - name: Feeds and config
         working-directory: openwrt
