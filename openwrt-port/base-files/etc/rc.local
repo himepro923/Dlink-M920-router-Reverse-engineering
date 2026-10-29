@@ -1,25 +1,35 @@
-# DWR-M920 bring-up diagnostics (test 8).
-# Userspace output on the serial console has not shown up yet, but kernel messages do, so this
-# dumps the state of the box into the kernel log (/dev/kmsg) a little after boot and then starts
-# a fallback shell on the serial port. Runs in the background so boot is never held up.
+# DWR-M920 bring-up diagnostics (test 9).
+# Userspace output on the serial console has not shown up, but kernel messages do, so this dumps
+# facts into the kernel log (/dev/kmsg) and pokes the UART directly. Background, never blocks boot.
 (
-	sleep 40
 	dump() { while IFS= read -r l; do echo "m920: $l" > /dev/kmsg; done; }
+	uartregs() {
+		for r in 04:IER 08:IIR 0c:LCR 10:MCR 14:LSR 18:MSR 20:STS; do
+			o=${r%%:*}; n=${r##*:}
+			echo "$n=$(devmem 0x180147$o 32 2>&1)"
+		done | tr '\n' ' '; echo
+	}
+	sleep 40
 	{
-		echo "== ps";            ps
-		echo "== inittab";       cat /etc/inittab
-		echo "== console";       cat /sys/class/tty/console/active; cat /proc/consoles
-		echo "== devices";       ls -l /dev/console /dev/ttyS0 /dev/tty
-		echo "== serial";        cat /proc/tty/driver/serial
-		echo "== interrupts";    cat /proc/interrupts
-		echo "== net";           ip link
-		echo "== mtd";           cat /proc/mtd
-		echo "== mounts";        cat /proc/mounts
-		echo "== libexec";       ls -l /usr/libexec /sbin/askfirst
-		echo "== rc.d";          ls /etc/rc.d
-		echo "== logread";       logread | tail -40
+		echo "== tty settings";  stty -a -F /dev/ttyS0 2>&1
+		echo "== sysfs ttyS0";   for f in line port irq uartclk type xmit_fifo_size io_type; do echo "$f=$(cat /sys/class/tty/ttyS0/$f 2>&1)"; done
+		echo "== proc";          cat /proc/tty/drivers 2>&1
+		echo "== uart regs";     uartregs
+		echo "== askfirst fds";  for p in $(pidof askfirst); do ls -l /proc/$p/fd 2>&1; done
+		echo "== lsmod|head";    lsmod 2>&1 | head -5
 	} 2>&1 | dump
-	echo "m920: starting fallback shell on ttyS0" > /dev/kmsg
+
+	# 1) write through the tty layer, 2) write straight into the UART transmit register
+	echo "m920: tty write test now (look for TTYTEST on the console)" > /dev/kmsg
+	echo "TTYTEST-via-ttyS0" > /dev/ttyS0 2>/dev/kmsg
+	sleep 2
+	echo "m920: raw THR write test now (look for ABCDEF)" > /dev/kmsg
+	for c in 0x41 0x42 0x43 0x44 0x45 0x46 0x0d 0x0a; do devmem 0x18147024 8 $c; usleep 5000 2>/dev/null || sleep 1; done
+	sleep 2
+	echo "== uart regs after"; uartregs | dump
+	echo "m920: done"  > /dev/kmsg
+
+	# fallback shell directly on the serial port
 	setsid /bin/sh -c 'exec /bin/ash --login </dev/ttyS0 >/dev/ttyS0 2>&1' &
 ) &
 exit 0
