@@ -1,0 +1,12 @@
+CONFIG_TARGET_realtek=y
+# CONFIG_TARGET_realtek_rtl8197d is not set
+# CONFIG_TARGET_realtek_rtl8196e is not set
+CONFIG_TARGET_realtek_rtl8197f=y
+# CONFIG_TARGET_realtek_rtl8197f_Default is not set
+# CONFIG_TARGET_realtek_rtl8197f_DEVICE_RE708 is not set
+# CONFIG_TARGET_realtek_rtl8197f_DEVICE_GWR1200AC-V1 is not set
+# CONFIG_TARGET_realtek_rtl8197f_DEVICE_GWR1200AC-V2 is not set
+# CONFIG_TARGET_realtek_rtl8197f_DEVICE_ACTIONRG1200 is not set
+# CONFIG_TARGET_realtek_rtl8197f_DEVICE_ACTIONRF1200 is not set
+CONFIG_TARGET_realtek_rtl8197f_DEVICE_DWRM920=y
+CONFIG_TARGET_PROFILE="DEVICE_DWRM920"

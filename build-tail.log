@@ -1,0 +1,300 @@
+  AR      drivers/video/fbdev/omap2/built-in.o
+  AR      drivers/video/fbdev/built-in.o
+  AR      drivers/video/built-in.o
+  CC      net/unix/af_unix.o
+  CC      drivers/tty/sysrq.o
+  CC      net/ipv4/inet_fragment.o
+  CC      net/sched/sch_fq_codel.o
+  AR      drivers/tty/ipwireless/built-in.o
+  CC      drivers/tty/serial/serial_core.o
+  CC      net/ipv4/ping.o
+  AR      net/sched/built-in.o
+  CC      drivers/tty/serial/earlycon.o
+  AR      drivers/tty/vt/built-in.o
+  CC      net/unix/garbage.o
+  CC      net/ipv4/ip_tunnel_core.o
+  AR      drivers/watchdog/built-in.o
+  CC      net/unix/sysctl_net_unix.o
+  CC      drivers/tty/serial/8250/8250_core.o
+  CC      net/wireless/wext-core.o
+  CC      net/ipv4/gre_offload.o
+  AR      net/unix/unix.o
+  AR      net/unix/built-in.o
+  CC      net/wireless/wext-proc.o
+  CC      drivers/tty/serial/8250/8250_port.o
+  CC      drivers/tty/serial/8250/8250_early.o
+  CC      net/ipv4/sysctl_net_ipv4.o
+  CC      net/wireless/wext-spy.o
+  CC      net/ipv4/proc.o
+  CC      net/wireless/wext-priv.o
+  CC      net/sysctl_net.o
+  CC      net/ipv4/fib_rules.o
+  CC      drivers/tty/serial/8250/8250_dw.o
+  AR      net/wireless/built-in.o
+  CC      drivers/tty/serial/8250/8250_of.o
+  CC      net/ipv4/ipmr.o
+drivers/tty/serial/8250/8250_dw.c: In function 'dw8250_serial_in':
+drivers/tty/serial/8250/8250_dw.c:161:2: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+  unsigned int value = readb(p->membase + (offset << p->regshift));
+  ^~~~~~~~
+drivers/tty/serial/8250/8250_dw.c: In function 'dw8250_serial_in32':
+drivers/tty/serial/8250/8250_dw.c:226:2: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+  unsigned int value = readl(p->membase + (offset << p->regshift));
+  ^~~~~~~~
+drivers/tty/serial/8250/8250_dw.c: In function 'dw8250_serial_in32be':
+drivers/tty/serial/8250/8250_dw.c:245:8: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+        unsigned int value = ioread32be(p->membase + (offset << p->regshift));
+        ^~~~~~~~
+In file included from ./include/linux/printk.h:7,
+                 from ./include/linux/kernel.h:14,
+                 from ./include/linux/list.h:9,
+                 from ./include/linux/kobject.h:20,
+                 from ./include/linux/device.h:17,
+                 from drivers/tty/serial/8250/8250_dw.c:16:
+drivers/tty/serial/8250/8250_dw.c: In function 'dw8250_handle_irq':
+./include/linux/kern_levels.h:5:18: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat=]
+ #define KERN_SOH "\001"  /* ASCII Start Of Header */
+                  ^~~~~~
+./include/linux/kern_levels.h:14:19: note: in expansion of macro 'KERN_SOH'
+ #define KERN_INFO KERN_SOH "6" /* informational */
+                   ^~~~~~~~
+./include/linux/printk.h:313:9: note: in expansion of macro 'KERN_INFO'
+  printk(KERN_INFO pr_fmt(fmt), ##__VA_ARGS__)
+         ^~~~~~~~~
+drivers/tty/serial/8250/8250_dw.c:304:4: note: in expansion of macro 'pr_info'
+    pr_info("dw8250: st pend=%d stopped=%d tx=%u rx=%u ovr=%u ier=%02x lcr=%02x mcr=%02x lsr=%02x iir=%02x waits=%u\n",
+    ^~~~~~~
+drivers/tty/serial/8250/8250_dw.c:304:30: note: format string is defined here
+    pr_info("dw8250: st pend=%d stopped=%d tx=%u rx=%u ovr=%u ier=%02x lcr=%02x mcr=%02x lsr=%02x iir=%02x waits=%u\n",
+                             ~^
+                             %ld
+  AR      drivers/tty/serial/8250/8250.o
+  CC      net/ipv4/syncookies.o
+  AR      drivers/tty/serial/8250/8250_base.o
+  CC      net/ipv4/netfilter.o
+  AR      drivers/tty/serial/8250/built-in.o
+  AR      drivers/tty/serial/built-in.o
+  AR      drivers/tty/built-in.o
+  AR      drivers/built-in.o
+  AR      net/ipv4/netfilter/built-in.o
+  CC      net/ipv4/tcp_cubic.o
+  AR      net/ipv4/built-in.o
+  AR      net/built-in.o
+  GEN     .version
+  CHK     include/generated/compile.h
+  AR      built-in.o
+  LD      vmlinux.o
+  MODPOST vmlinux.o
+  KSYM    .tmp_kallsyms1.o
+  KSYM    .tmp_kallsyms2.o
+  LD      vmlinux
+  SORTEX  vmlinux
+  SYSMAP  System.map
+  Building modules, stage 2.
+  MODPOST 54 modules
+  LD [M]  drivers/net/wireless/rtl8192cd/rtl8192cd.ko
+make[5]: Nothing to be done for 'modules'.
+make[5]: Leaving directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187'
+cmp -s /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/vmlinux /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/vmlinux.debug || { mipsel-openwrt-linux-musl-objcopy -O binary -R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id -S /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/vmlinux /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/vmlinux; mipsel-openwrt-linux-musl-objcopy -R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id -S /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/vmlinux /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/vmlinux.elf; cp -fpR /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/vmlinux /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/vmlinux.debug;  }
+touch /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/.image
+make -C image compile install TARGET_BUILD=
+make[5]: Entering directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/target/linux/realtek/image'
+make[5]: Nothing to be done for 'compile'.
+mipsel-openwrt-linux-musl-cpp -nostdinc -x assembler-with-cpp -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts/include -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/include/ -undef -D__DTS__  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-RE708.dtb.tmp ../dts/RE708.dts
+mipsel-openwrt-linux-musl-cpp -nostdinc -x assembler-with-cpp -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts/include -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/include/ -undef -D__DTS__  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-GWR1200ACV1.dtb.tmp ../dts/GWR1200ACV1.dts
+mipsel-openwrt-linux-musl-cpp -nostdinc -x assembler-with-cpp -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts/include -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/include/ -undef -D__DTS__  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-GWR1200ACV2.dtb.tmp ../dts/GWR1200ACV2.dts
+mipsel-openwrt-linux-musl-cpp -nostdinc -x assembler-with-cpp -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts/include -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/include/ -undef -D__DTS__  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-ACTIONRG1200.dtb.tmp ../dts/ACTIONRG1200.dts
+/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/scripts/dtc/dtc -O dtb -i../dts/ -Wno-unit_address_vs_reg -Wno-simple_bus_reg -Wno-unit_address_format -Wno-pci_bridge -Wno-pci_device_bus_num -Wno-pci_device_reg  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-RE708.dtb /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-RE708.dtb.tmp
+/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/scripts/dtc/dtc -O dtb -i../dts/ -Wno-unit_address_vs_reg -Wno-simple_bus_reg -Wno-unit_address_format -Wno-pci_bridge -Wno-pci_device_bus_num -Wno-pci_device_reg  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-GWR1200ACV1.dtb /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-GWR1200ACV1.dtb.tmp
+/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/scripts/dtc/dtc -O dtb -i../dts/ -Wno-unit_address_vs_reg -Wno-simple_bus_reg -Wno-unit_address_format -Wno-pci_bridge -Wno-pci_device_bus_num -Wno-pci_device_reg  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-GWR1200ACV2.dtb /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-GWR1200ACV2.dtb.tmp
+/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/scripts/dtc/dtc -O dtb -i../dts/ -Wno-unit_address_vs_reg -Wno-simple_bus_reg -Wno-unit_address_format -Wno-pci_bridge -Wno-pci_device_bus_num -Wno-pci_device_reg  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-ACTIONRG1200.dtb /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-ACTIONRG1200.dtb.tmp
+rm -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-RE708.dtb.tmp
+rm -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-GWR1200ACV1.dtb.tmp
+rm -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-GWR1200ACV2.dtb.tmp
+rm -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-ACTIONRG1200.dtb.tmp
+mipsel-openwrt-linux-musl-cpp -nostdinc -x assembler-with-cpp -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts/include -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/include/ -undef -D__DTS__  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-ACTIONRF1200.dtb.tmp ../dts/ACTIONRF1200.dts
+mipsel-openwrt-linux-musl-cpp -nostdinc -x assembler-with-cpp -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/arch/mips/boot/dts/include -I/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/include/ -undef -D__DTS__  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-DWRM920.dtb.tmp ../dts/DWRM920.dts
+/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/scripts/dtc/dtc -O dtb -i../dts/ -Wno-unit_address_vs_reg -Wno-simple_bus_reg -Wno-unit_address_format -Wno-pci_bridge -Wno-pci_device_bus_num -Wno-pci_device_reg  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-DWRM920.dtb /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-DWRM920.dtb.tmp
+/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/linux-4.14.187/scripts/dtc/dtc -O dtb -i../dts/ -Wno-unit_address_vs_reg -Wno-simple_bus_reg -Wno-unit_address_format -Wno-pci_bridge -Wno-pci_device_bus_num -Wno-pci_device_reg  -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-ACTIONRF1200.dtb /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-ACTIONRF1200.dtb.tmp
+rm -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-DWRM920.dtb.tmp
+rm -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-ACTIONRF1200.dtb.tmp
+mkdir -p /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/bin/targets/realtek/rtl8197f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp
+rm -rf /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/json_info_files
+/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/staging_dir/host/bin/mksquashfs4 /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/root-realtek /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/root.squashfs -nopad -noappend -root-owned -comp xz -Xpreset 9 -Xe -Xlc 0 -Xlp 2 -Xpb 2  -b 256k -p '/dev d 755 0 0' -p '/dev/console c 600 0 0 5 1' -processors 1
+rm -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin
+cp /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/vmlinux /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin
+Pseudo file "/dev" exists in source filesystem "/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/root-realtek/dev".
+Ignoring, exclude it (-e/-ef) to override.
+cat /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/image-DWRM920.dtb >> /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin
+/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/staging_dir/host/bin/lzma e /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin -lc1 -lp2 -pb2  /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin.new
+Parallel mksquashfs: Using 1 processor
+Creating 4.0 filesystem on /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/root.squashfs, block size 262144.
+[===============================================================-] 494/494 100%
+
+Exportable Squashfs 4.0 filesystem, xz compressed, data block size 262144
+	compressed data, compressed metadata, compressed fragments,
+	no xattrs, compressed ids
+	duplicates are removed
+Filesystem size 1335.81 Kbytes (1.30 Mbytes)
+	37.32% of uncompressed filesystem size (3579.02 Kbytes)
+Inode table size 4738 bytes (4.63 Kbytes)
+	19.28% of uncompressed inode table size (24580 bytes)
+Directory table size 7092 bytes (6.93 Kbytes)
+	48.08% of uncompressed directory table size (14749 bytes)
+Number of duplicate files found 67
+Number of inodes 737
+Number of files 494
+Number of fragments 13
+Number of symbolic links  176
+Number of device nodes 1
+Number of fifo nodes 0
+Number of socket nodes 0
+Number of directories 66
+Number of ids (unique uids + gids) 1
+Number of uids 1
+	root (0)
+Number of gids 1
+	root (0)
+rm -rf /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin.src
+export MAKEFLAGS= ;make -w -C lzma-loader PKG_BUILD_DIR="/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin.src" TARGET_DIR="/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/" LOADER_NAME="DWRM920-kernel.bin" BOARD="DWRM920" SUBTARGET="rtl8197f" LZMA_TEXT_START=0x80A00000 LOADADDR=0x80000000 LOADER_DATA="/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin" KERNEL_CMDLINE="console=ttyS0,38400" compile loader.bin
+make[6]: Entering directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/target/linux/realtek/image/lzma-loader'
+mkdir /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin.src
+cp -fpR ./src/* /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin.src/
+touch /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin.src/.prepared
+make -C /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin.src CROSS_COMPILE="mipsel-openwrt-linux-musl-" \
+	LZMA_TEXT_START=0x80A00000 \
+	LOADADDR=0x80000000 \
+	LOADER_DATA=/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin \
+	BOARD="DWRM920" \
+	SUBTARGET="rtl8197f" \
+	clean all
+make[7]: Entering directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin.src'
+rm -f loader *.elf *.bin *.o
+mipsel-openwrt-linux-musl-gcc -D__KERNEL__ -Wall -Wstrict-prototypes -Wno-trigraphs -Os -fno-strict-aliasing -fno-common -fomit-frame-pointer -G 0 -mno-abicalls -fno-pic -ffunction-sections -pipe -mlong-calls -fno-common -ffreestanding -mabi=32 -Wa,-32  -march=mips32r2 -Wa,-march=mips32r2  -D_LZMA_PROB32 -DLZMA_WRAPPER=1 -DLOADADDR=0x80000000 -DCONFIG_KERNEL_CMDLINE='"console=ttyS0,38400"' -DCONFIG_BOARD_DWRM920 -D__ASSEMBLY__ -c -o head.o head.S
+mipsel-openwrt-linux-musl-gcc -D__KERNEL__ -Wall -Wstrict-prototypes -Wno-trigraphs -Os -fno-strict-aliasing -fno-common -fomit-frame-pointer -G 0 -mno-abicalls -fno-pic -ffunction-sections -pipe -mlong-calls -fno-common -ffreestanding -mabi=32 -Wa,-32  -march=mips32r2 -Wa,-march=mips32r2  -D_LZMA_PROB32 -DLZMA_WRAPPER=1 -DLOADADDR=0x80000000 -DCONFIG_KERNEL_CMDLINE='"console=ttyS0,38400"' -DCONFIG_BOARD_DWRM920 -c -o loader.o loader.c
+cc1: note: someone does not honour COPTS correctly, passed 0 times
+mipsel-openwrt-linux-musl-gcc -D__KERNEL__ -Wall -Wstrict-prototypes -Wno-trigraphs -Os -fno-strict-aliasing -fno-common -fomit-frame-pointer -G 0 -mno-abicalls -fno-pic -ffunction-sections -pipe -mlong-calls -fno-common -ffreestanding -mabi=32 -Wa,-32  -march=mips32r2 -Wa,-march=mips32r2  -D_LZMA_PROB32 -DLZMA_WRAPPER=1 -DLOADADDR=0x80000000 -DCONFIG_KERNEL_CMDLINE='"console=ttyS0,38400"' -DCONFIG_BOARD_DWRM920 -c -o cache.o cache.c
+cc1: note: someone does not honour COPTS correctly, passed 0 times
+mipsel-openwrt-linux-musl-gcc -D__KERNEL__ -Wall -Wstrict-prototypes -Wno-trigraphs -Os -fno-strict-aliasing -fno-common -fomit-frame-pointer -G 0 -mno-abicalls -fno-pic -ffunction-sections -pipe -mlong-calls -fno-common -ffreestanding -mabi=32 -Wa,-32  -march=mips32r2 -Wa,-march=mips32r2  -D_LZMA_PROB32 -DLZMA_WRAPPER=1 -DLOADADDR=0x80000000 -DCONFIG_KERNEL_CMDLINE='"console=ttyS0,38400"' -DCONFIG_BOARD_DWRM920 -c -o board.o board.c
+cc1: note: someone does not honour COPTS correctly, passed 0 times
+mipsel-openwrt-linux-musl-gcc -D__KERNEL__ -Wall -Wstrict-prototypes -Wno-trigraphs -Os -fno-strict-aliasing -fno-common -fomit-frame-pointer -G 0 -mno-abicalls -fno-pic -ffunction-sections -pipe -mlong-calls -fno-common -ffreestanding -mabi=32 -Wa,-32  -march=mips32r2 -Wa,-march=mips32r2  -D_LZMA_PROB32 -DLZMA_WRAPPER=1 -DLOADADDR=0x80000000 -DCONFIG_KERNEL_CMDLINE='"console=ttyS0,38400"' -DCONFIG_BOARD_DWRM920 -c -o printf.o printf.c
+cc1: note: someone does not honour COPTS correctly, passed 0 times
+mipsel-openwrt-linux-musl-gcc -D__KERNEL__ -Wall -Wstrict-prototypes -Wno-trigraphs -Os -fno-strict-aliasing -fno-common -fomit-frame-pointer -G 0 -mno-abicalls -fno-pic -ffunction-sections -pipe -mlong-calls -fno-common -ffreestanding -mabi=32 -Wa,-32  -march=mips32r2 -Wa,-march=mips32r2  -D_LZMA_PROB32 -DLZMA_WRAPPER=1 -DLOADADDR=0x80000000 -DCONFIG_KERNEL_CMDLINE='"console=ttyS0,38400"' -DCONFIG_BOARD_DWRM920 -c -o LzmaDecode.o LzmaDecode.c
+cc1: note: someone does not honour COPTS correctly, passed 0 times
+mipsel-openwrt-linux-musl-ld -r -b binary --oformat elf32-tradlittlemips -T lzma-data.lds -o data.o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin
+mipsel-openwrt-linux-musl-ld -static --gc-sections -no-warn-mismatch -e startup -T loader.lds -Ttext 0x80A00000 -o loader head.o loader.o cache.o board.o printf.o LzmaDecode.o data.o
+mipsel-openwrt-linux-musl-objcopy -O binary -R .reginfo -R .note -R .comment -R .mdebug -R .MIPS.abiflags -S loader loader.bin
+mipsel-openwrt-linux-musl-ld -r -b binary --oformat elf32-tradlittlemips -o loader2.o loader.bin
+mipsel-openwrt-linux-musl-ld -e startup -T loader2.lds -Ttext 0x80000000 -o loader.elf loader2.o
+make[7]: Leaving directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin.src'
+make[6]: Leaving directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/target/linux/realtek/image/lzma-loader'
+mv "/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin.bin" "/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin"
+rm -rf /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin.src
+[ -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin -a -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/root.squashfs ]
+[ -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin -a -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/root.squashfs ]
+dd if=/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin >> /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin
+dd if=/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/root.squashfs >> /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-rootfs.bin
+2671+1 records in
+2671+1 records out
+1367870 bytes (1.4 MB, 1.3 MiB) copied, 0.00636657 s, 215 MB/s
+perl -e 'local $/; open F,"</__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-rootfs.bin" or die; $d=<F>; close F; $d.="\0" x ((65534-length($d)%65536+65536)%65536); substr($d,8,4)=pack("N",length($d)+2-0x282); $s=0; $s+=$_ for unpack("n*",$d); $c=(-$s)&0xffff; open O,">/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-rootfs.bin" or die; binmode O; print O $d, pack("n",$c); close O'
+3318+1 records in
+3318+1 records out
+1699088 bytes (1.7 MB, 1.6 MiB) copied, 0.00790108 s, 215 MB/s
+/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/staging_dir/host/bin/cvimg -i /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin -o /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin.new  -e 0x80A00000 -b 0x30000 -s cr6c  && mv /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin.new /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin || rm -f /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin
+Image created:
+    Filename:		/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin.new
+    Signature:		cr6c
+    Start address:	0x80a00000
+    Burn address:	0x00030000
+    Data size (oct.):	1699090 bytes
+    Checksum:		a6d3
+dd if=/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin of=/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin.new bs=2880k conv=sync
+0+1 records in
+1+0 records out
+2949120 bytes (2.9 MB, 2.8 MiB) copied, 0.00317026 s, 930 MB/s
+mv /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin.new /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin
+cp /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/bin/targets/realtek/rtl8197f/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin
+cp /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/tmp/openwrt-realtek-rtl8197f-DWRM920-squashfs-rootfs.bin /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/bin/targets/realtek/rtl8197f/openwrt-realtek-rtl8197f-DWRM920-squashfs-rootfs.bin
+IPKG_NO_SCRIPT=1 IPKG_INSTROOT=/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/root.orig-realtek TMPDIR=/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/root.orig-realtek/tmp /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/staging_dir/host/bin/opkg --offline-root /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/build_dir/target-mipsel_24kc_musl/root.orig-realtek --force-postinstall --add-dest root:/ --add-arch all:100 --add-arch mipsel_24kc:200 list-installed > /__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/bin/targets/realtek/rtl8197f/openwrt-realtek-rtl8197f-dwrm920.manifest
+make[5]: Leaving directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/target/linux/realtek/image'
+make[4]: Leaving directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/target/linux/realtek'
+make[3]: Leaving directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt/target/linux'
+time: target/linux/install#305.46#57.85#96.92
+make[2]: Leaving directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt'
+export MAKEFLAGS= ;make -w -r package/index
+make[2]: Entering directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt'
+Generating package index...
+Generating index for package ./base-files_225-r14023+3-1deaf695ec_mipsel_24kc.ipk
+Generating index for package ./fstools_2020-06-17-d34ea8eb-1_mipsel_24kc.ipk
+Generating index for package ./fwtool_2019-11-12-8f7fe925-1_mipsel_24kc.ipk
+Generating index for package ./ip6tables_1.8.4-1_mipsel_24kc.ipk
+Generating index for package ./iptables_1.8.4-1_mipsel_24kc.ipk
+Generating index for package ./kmod-gpio-button-hotplug_4.14.187-3_mipsel_24kc.ipk
+Generating index for package ./kmod-ip6tables_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-ipt-conntrack_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-ipt-core_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-ipt-nat_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-ipt-offload_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-lib-crc-ccitt_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-nf-conntrack6_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-nf-conntrack_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-nf-flow_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-nf-ipt6_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-nf-ipt_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-nf-nat_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-nf-reject6_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-nf-reject_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-ppp_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-pppoe_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-pppox_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./kmod-slhc_4.14.187-1_mipsel_24kc.ipk
+Generating index for package ./libgcc1_8.4.0-2_mipsel_24kc.ipk
+Generating index for package ./libip4tc2_1.8.4-1_mipsel_24kc.ipk
+Generating index for package ./libip6tc2_1.8.4-1_mipsel_24kc.ipk
+Generating index for package ./libpthread_1.1.24-2_mipsel_24kc.ipk
+Generating index for package ./libxtables12_1.8.4-1_mipsel_24kc.ipk
+Generating index for package ./mtd_25_mipsel_24kc.ipk
+Generating index for package ./busybox_1.31.1-1_mipsel_24kc.ipk
+Generating index for package ./dnsmasq_2.82-3_mipsel_24kc.ipk
+Generating index for package ./dropbear_2020.80-1_mipsel_24kc.ipk
+Generating index for package ./firewall_2020-07-25-e9b90dfa-1_mipsel_24kc.ipk
+Generating index for package ./getrandom_2019-12-31-0e34af14-4_mipsel_24kc.ipk
+Generating index for package ./jshn_2020-07-11-f4e9bf73-1_mipsel_24kc.ipk
+Generating index for package ./jsonfilter_2018-02-04-c7e938d6-1_mipsel_24kc.ipk
+Generating index for package ./libblobmsg-json_2020-07-11-f4e9bf73-1_mipsel_24kc.ipk
+Generating index for package ./libjson-c5_0.14-1_mipsel_24kc.ipk
+Generating index for package ./libjson-script_2020-07-11-f4e9bf73-1_mipsel_24kc.ipk
+Generating index for package ./libnl-tiny_2019-10-29-0219008c-1_mipsel_24kc.ipk
+Generating index for package ./libubox20191228_2020-07-11-f4e9bf73-1_mipsel_24kc.ipk
+Generating index for package ./libubus20191227_2020-02-05-171469e3-1_mipsel_24kc.ipk
+Generating index for package ./libuci20130104_2020-04-24-ec8d3233-3_mipsel_24kc.ipk
+Generating index for package ./libuclient20160123_2020-06-17-c6609861-1_mipsel_24kc.ipk
+Generating index for package ./logd_2019-12-31-0e34af14-4_mipsel_24kc.ipk
+Generating index for package ./netifd_2020-06-06-51e9fb81-1_mipsel_24kc.ipk
+Generating index for package ./odhcp6c_2020-03-28-f575351c-16_mipsel_24kc.ipk
+Generating index for package ./odhcpd-ipv6only_2020-06-21-5da52992-4_mipsel_24kc.ipk
+Generating index for package ./openwrt-keyring_2019-07-25-8080ef34-1_mipsel_24kc.ipk
+Generating index for package ./opkg_2020-05-07-f2166a89-1_mipsel_24kc.ipk
+Generating index for package ./ppp-mod-pppoe_2.4.8.git-2020-05-25-2_mipsel_24kc.ipk
+Generating index for package ./ppp_2.4.8.git-2020-05-25-2_mipsel_24kc.ipk
+Generating index for package ./procd_2020-07-30-2ae5cbcf-1_mipsel_24kc.ipk
+Generating index for package ./swconfig_12_mipsel_24kc.ipk
+Generating index for package ./ubox_2019-12-31-0e34af14-4_mipsel_24kc.ipk
+Generating index for package ./ubus_2020-02-05-171469e3-1_mipsel_24kc.ipk
+Generating index for package ./ubusd_2020-02-05-171469e3-1_mipsel_24kc.ipk
+Generating index for package ./uci_2020-04-24-ec8d3233-3_mipsel_24kc.ipk
+Generating index for package ./uclient-fetch_2020-06-17-c6609861-1_mipsel_24kc.ipk
+Generating index for package ./urandom-seed_2_mipsel_24kc.ipk
+Generating index for package ./urngd_2020-01-21-c7f7b6b6-1_mipsel_24kc.ipk
+Generating index for package ./usign_2020-05-23-f1f65026-1_mipsel_24kc.ipk
+Signing package index...
+make[2]: Leaving directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt'
+export MAKEFLAGS= ;make -w -r json_overview_image_info
+make[2]: Entering directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt'
+make[2]: Nothing to be done for 'json_overview_image_info'.
+make[2]: Leaving directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt'
+export MAKEFLAGS= ;make -w -r checksum
+make[2]: Entering directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt'
+make[2]: Leaving directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt'
+make[1]: Leaving directory '/__w/Dlink-M920-router-Reverse-engineering/Dlink-M920-router-Reverse-engineering/openwrt'

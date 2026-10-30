@@ -1,0 +1,15 @@
+== image files
+total 4248
+-rw-r--r-- 1 root root     141 Oct 30 09:37 config.buildinfo
+-rw-r--r-- 1 root root     263 Oct 30 09:37 feeds.buildinfo
+-rw-r--r-- 1 root root 2949120 Oct 30 09:41 openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin
+-rw-r--r-- 1 root root 1376256 Oct 30 09:41 openwrt-realtek-rtl8197f-DWRM920-squashfs-rootfs.bin
+-rw-r--r-- 1 root root    1877 Oct 30 09:41 openwrt-realtek-rtl8197f-dwrm920.manifest
+drwxr-xr-x 2 root root    4096 Oct 30 09:41 packages
+-rw-r--r-- 1 root root     595 Oct 30 09:41 sha256sums
+-rw-r--r-- 1 root root      20 Oct 30 09:37 version.buildinfo
+== all bins
+-rw-r--r-- 1 root root 2949120 Oct 30 09:41 openwrt/bin/targets/realtek/rtl8197f/openwrt-realtek-rtl8197f-DWRM920-squashfs-kernel.bin
+-rw-r--r-- 1 root root 1376256 Oct 30 09:41 openwrt/bin/targets/realtek/rtl8197f/openwrt-realtek-rtl8197f-DWRM920-squashfs-rootfs.bin
+== dtb/dts
+openwrt/build_dir/target-mipsel_24kc_musl/linux-realtek_rtl8197f/DWRM920-kernel.bin
