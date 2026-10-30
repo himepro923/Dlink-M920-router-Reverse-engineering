@@ -1,8 +1,50 @@
-serial: 8250_dw: allow polled mode when no irq; always read LSR when polled; report unusual IIR ids and port state (RTL8197F M920)
+serial: 8250_dw: polled mode, always read LSR, wait for THRE before each TX write, port-state diagnostics (RTL8197F M920)
 
 --- a/drivers/tty/serial/8250/8250_dw.c
 +++ b/drivers/tty/serial/8250/8250_dw.c
-@@ -232,6 +232,17 @@
+@@ -25,6 +25,7 @@
+ #include <linux/slab.h>
+ #include <linux/acpi.h>
+ #include <linux/clk.h>
++#include <linux/delay.h>
+ #include <linux/reset.h>
+ #include <linux/pm_runtime.h>
+ 
+@@ -186,11 +187,33 @@
+ }
+ #endif /* CONFIG_64BIT */
+ 
++/*
++ * RTL8197F (M920): bursts of characters written by the tty layer (up to tx_loadsz at once) never
++ * reach the wire although the console, which waits for THRE before every character, works. Do the
++ * same here: before every transmit-register write wait (bounded) until the UART can take it.
++ */
++static unsigned int dw8250_thre_waits;
++
++static void dw8250_wait_thre(struct uart_port *p)
++{
++	int i;
++
++	for (i = 0; i < 20000; i++) {
++		if (readl(p->membase + (UART_LSR << p->regshift)) & UART_LSR_THRE)
++			return;
++		if (!i)
++			dw8250_thre_waits++;
++		udelay(1);
++	}
++}
++
+ static void dw8250_serial_out32(struct uart_port *p, int offset, int value)
+ {
+ 	struct dw8250_data *d = p->private_data;
+ 
+ 	offset = dw_change_offset(p, offset);
++	if (offset == 9 && d->adjlcr)
++		dw8250_wait_thre(p);
+ 	writel(value, p->membase + (offset << p->regshift));
+ 
+ 	if (offset == UART_LCR && !d->uart_16550_compatible)
+@@ -232,6 +255,17 @@
  	unsigned int iir = p->serial_in(p, UART_IIR);
  	unsigned int status;
  	unsigned long flags;
@@ -20,7 +62,7 @@ serial: 8250_dw: allow polled mode when no irq; always read LSR when polled; rep
  
  	/*
  	 * There are ways to get Designware-based UARTs into a state where
-@@ -253,6 +264,31 @@
+@@ -253,6 +287,38 @@
  		spin_unlock_irqrestore(&p->lock, flags);
  	}
  
@@ -28,15 +70,22 @@ serial: 8250_dw: allow polled mode when no irq; always read LSR when polled; rep
 +	{
 +		static unsigned long dbg_next;
 +		static int dbg_n;
++		static bool dbg_init;
 +
-+		if (p->state && dbg_n < 40 && time_after(jiffies, dbg_next)) {
++		if (!dbg_init) {
++			dbg_init = true;
++			dbg_next = jiffies;
++		}
++
++		if (p->state && dbg_n < 40 && time_after_eq(jiffies, dbg_next)) {
 +			dbg_next = jiffies + 5 * HZ;
 +			dbg_n++;
-+			pr_info("dw8250: st pend=%d stopped=%d tx=%u rx=%u ovr=%u ier=%02x lcr=%02x mcr=%02x lsr=%02x iir=%02x\n",
++			pr_info("dw8250: st pend=%d stopped=%d tx=%u rx=%u ovr=%u ier=%02x lcr=%02x mcr=%02x lsr=%02x iir=%02x waits=%u\n",
 +				uart_circ_chars_pending(&p->state->xmit), uart_tx_stopped(p),
 +				p->icount.tx, p->icount.rx, p->icount.overrun,
 +				p->serial_in(p, UART_IER), p->serial_in(p, UART_LCR),
-+				p->serial_in(p, UART_MCR), p->serial_in(p, UART_LSR), iir);
++				p->serial_in(p, UART_MCR), p->serial_in(p, UART_LSR), iir,
++				dw8250_thre_waits);
 +		}
 +	}
 +
@@ -52,7 +101,7 @@ serial: 8250_dw: allow polled mode when no irq; always read LSR when polled; rep
  	if (serial8250_handle_irq(p, iir))
  		return 1;
  
-@@ -458,9 +494,15 @@
+@@ -458,9 +524,15 @@
  	}
  
  	if (irq < 0) {
